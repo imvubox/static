@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta property="fb:admins" content="1815499134,100001242585159">
+    <meta property="fb:app_id" content="115704345132142">
+    <meta property="og:title" content="imvubox.com - JS Slideshow for Product Pages">
+    <meta name="description" property="og:description" content="Intro:
+
+I have been playing with jQuery, and I figured out how to create a slideshow using just JavaScript and images hosted on a third-party server.  No Flash is required!  Each image fades out while the next image fades in, and you can cycle through the images or display them at random.  Best of all, it works on all modern browsers (IE, Firefox, Chrome and Opera).
+
+*** NOTE ***
+I've just created a code generator for my slideshows.  If you want to use it, check out the following page:
+http://www.triggerless.com/imvu/slide_ex.htm
+*** NOTE ***
+
+How to use it:
+
+In your product page 'Edit Settings', insert the following HTML code:
+
+(It's in the code section)
+
+Now you are going to have to edit the options for your own pictures.
+
+You probably don't need to edit the value for boxWidth, this is 910 by default, the width of the IFRAME where your product description is displayed.
+
+You WILL want to change the imageHeight and ImageWidth values so they correspond to your image.  You can also use this to shrink your images if you like, but if you don't keep the same aspect ratio, your images will look distorted.
+
+The value for &quot;path&quot; is the base URL to your images, minus the specific file name.  If you have an account in Photobucket or somewhere else, you should use that.  The trailing slash (/) is optional, the script will put it there if required.
+
+The important one is &quot;files&quot;.  This is enclosed in square braces [] and is a comma-delimited list of file names, and each file name is enclosed in single quotes.  The script combines the &quot;path&quot; value with each of the &quot;files&quot; values to come up with the full URL of the images to display.
+
+You can change the backgroundColor, too, so it matches the rest of your product page.  You can use named colors like 'black' or 'aliceblue', or RGB values like '#990066'.  Make sure to include the pound sign (#) for RGB values.
+
+There are two delays, swapDelay and fadeDelay, that are in milliseconds.  The swapDelay determines how long to wait before changing images.  The fadeDelay determines how long the fading animation will last.  You can play with these numbers until you get an effect you like.
+
+Finally, there are two possible values for 'method', those are 'cycle' and 'random'.  Cycle will start at the first image and cycle through the files in sequence, and loop back to the beginning.  Random will pick the images at random, except it won't show the same image twice in a row.
+
+I plan on adding new features to the script.  I'm hosting it on www.triggerless.com, but if you would rather host it on your own server, feel free to download it and use it.
+
+Love,
+Cheri
+http://avatars.imvu.com/Cheri
+
+Update(1/20/2010): I've added support for a new option called 'onSwap' for JavaScript gurus.  If you don't understand what an 'event' is, you probably should skip over this.  Now my script will fire an event called onSwap, and you can add a callback function to execute every time the images swap.  The syntax is like this:
+
+var o_options = {
+        // all the other options
+        onSwap: function() { /* your code goes here */ }
+};">
+    <meta property="og:site_name" content="imvubox.com">
+    <meta property="og:image" content="http://www.imvubox.com/img/logo_square.png">
+    <meta property="og:url" content="http://imvubox.com/">
+    <meta property="og:type" content="website">
+    <meta name="DC.Publisher" content="imvubox.com">
+    <meta name="DC.Identifier" content="http://imvubox.com/">
+    <meta name="DC.Language" content="en">
+    <meta name="DC.Rights" content="/page/terms">
+    <meta name="SELF.Pagetype" content="page">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>imvubox.com - JS Slideshow for Product Pages</title>
+    <style>
+    @import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css);
+    @import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css);
+    @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+    @import url(https://fonts.googleapis.com/css?family=Montserrat:700);
+    @import url(css/style.css);
+    </style>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+  </head>
+  <body class="bg-faded">
+    <nav id="topNav" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <button class="navbar-toggler hidden-md-up pull-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+            ☰
+        </button>
+        <a class="navbar-brand page-scroll" href=".">imvubox</a>
+        <div class="collapse navbar-toggleable-sm" id="collapsingNavbar">
+          <ul class="nav navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href=".">Snippets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="badges">Badges</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="search">Search</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav pull-xs-right">
+            <li class="nav-item">
+              <a class="nav-link" href="page">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section>
+      <div class="container">
+        <div class="row">
+  <div class="col-xs-12 col-lg-6">
+    <h2 class="text-nowrap">JS Slideshow for Product Pages</h2>
+  </div>
+  <div class="col-xs-12 col-lg-6 text-xs-right">
+    <div class="dropdown">
+      <button class="btn text-normal btn-primary-outline dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Share
+      </button>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
+        <a class="dropdown-item" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.imvubox.com%2Fcontent%2Fjs-slideshow-for-product-pages" target="_blank">Facebook</a>
+        <a class="dropdown-item" href="https://twitter.com/home?status=http%3A%2F%2Fwww.imvubox.com%2Fcontent%2Fjs-slideshow-for-product-pages+%23imvu+%23imvubox" target="_blank">Twitter</a>
+        <a class="dropdown-item" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.imvubox.com%2Fcontent%2Fjs-slideshow-for-product-pages" target="_blank">Google+</a>
+        <a class="dropdown-item" href="mailto:?&amp;subject=imvubox&amp;body=http%3A%2F%2Fwww.imvubox.com%2Fcontent%2Fjs-slideshow-for-product-pages">Mail</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <p class="lead">Intro:<br><br>I have been playing with jQuery, and I figured out how to create a slideshow using just JavaScript and images hosted on a third-party server.  No Flash is required!  Each image fades out while the next image fades in, and you can cycle through the images or display them at random.  Best of all, it works on all modern browsers (IE, Firefox, Chrome and Opera).<br><br>*** NOTE ***<br>I've just created a code generator for my slideshows.  If you want to use it, check out the following page:<br>http://www.triggerless.com/imvu/slide_ex.htm<br>*** NOTE ***<br><br>How to use it:<br><br>In your product page 'Edit Settings', insert the following HTML code:<br><br>(It's in the code section)<br><br>Now you are going to have to edit the options for your own pictures.<br><br>You probably don't need to edit the value for boxWidth, this is 910 by default, the width of the IFRAME where your product description is displayed.<br><br>You WILL want to change the imageHeight and ImageWidth values so they correspond to your image.  You can also use this to shrink your images if you like, but if you don't keep the same aspect ratio, your images will look distorted.<br><br>The value for &quot;path&quot; is the base URL to your images, minus the specific file name.  If you have an account in Photobucket or somewhere else, you should use that.  The trailing slash (/) is optional, the script will put it there if required.<br><br>The important one is &quot;files&quot;.  This is enclosed in square braces [] and is a comma-delimited list of file names, and each file name is enclosed in single quotes.  The script combines the &quot;path&quot; value with each of the &quot;files&quot; values to come up with the full URL of the images to display.<br><br>You can change the backgroundColor, too, so it matches the rest of your product page.  You can use named colors like 'black' or 'aliceblue', or RGB values like '#990066'.  Make sure to include the pound sign (#) for RGB values.<br><br>There are two delays, swapDelay and fadeDelay, that are in milliseconds.  The swapDelay determines how long to wait before changing images.  The fadeDelay determines how long the fading animation will last.  You can play with these numbers until you get an effect you like.<br><br>Finally, there are two possible values for 'method', those are 'cycle' and 'random'.  Cycle will start at the first image and cycle through the files in sequence, and loop back to the beginning.  Random will pick the images at random, except it won't show the same image twice in a row.<br><br>I plan on adding new features to the script.  I'm hosting it on www.triggerless.com, but if you would rather host it on your own server, feel free to download it and use it.<br><br>Love,<br>Cheri<br>http://avatars.imvu.com/Cheri<br><br>Update(1/20/2010): I've added support for a new option called 'onSwap' for JavaScript gurus.  If you don't understand what an 'event' is, you probably should skip over this.  Now my script will fire an event called onSwap, and you can add a callback function to execute every time the images swap.  The syntax is like this:<br><br>var o_options = {<br>        // all the other options<br>        onSwap: function() { /* your code goes here */ }<br>};</p>
+    <div class="alert alert-info">This code snippet was originally contributed by <a href="http://www.facebook.com/747353694" target="_blank">Cheri Imvu</a>. <a href="http://www.imvu.com/catalog/web_mypage.php?user=25522141" target="_blank">Go to the author' imvu website.</a></div>  </div>
+  <div class="col-xs-12 wow bounce">
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6893972139462380" data-ad-slot="2839947777"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div></div>
+<div class="row">
+  <div class="col-md-8 col-xs-12 text-xs-center">
+    <div class="card text-normal">
+      <div class="card-block">
+       <textarea readonly="readonly" id="copyPaste" rel="tooltip" rows="18" class="autoHeight" style="border:none;cursor:default;font-family:'Courier New',serif;width:100%;white-space:nowrap;" onclick="this.select();"> 
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+var o_options = {
+	boxWidth: 910,         //default is 910 for IMVU product page
+	                       //change this if you're inserting slideshow into smaller space
+	imageHeight: 500,      //in pixels, of course
+	imageWidth: 500,
+	path: 'http://www.triggerless.com/imvu/cheri/Chain/',
+	files: ['chain0.jpg', 'chain1.jpg', 'chain2.jpg', 'chain3.jpg', 'chain4.jpg', 'chain5.jpg', 'chain6.jpg'],
+	backgroundColor: '#000022',    //use named color or #RRGGBB color.
+	swapDelay: 2500,       //delays are in milliseconds
+	fadeDelay: 1400,
+	method: 'cycle'        //choose 'cycle' or 'random'
+};
+
+&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.triggerless.com/imvu/slideshow.js&quot;&gt;&lt;/script&gt; 
+ 
+</textarea>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-xs-12">
+    <div class="wow bounce">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-6893972139462380" data-ad-slot="7304202328"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>  </div>
+</div>      </div>
+    </section>
+    <footer id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6 col-sm-3">
+            <h6 class="text-uppercase">imvubox</h6>
+            <ul class="list-unstyled">
+              <li><a href=".">Snippets</a></li>
+              <li><a href="badges">Badges</a></li>
+              <li><a href="search">Search</a></li>
+            </ul>
+          </div>
+          <div class="col-xs-6 col-sm-3 column">
+            <h6 class="text-uppercase">About</h6>
+            <ul class="list-unstyled">
+              <li><a href="page/imvubox">imvubox</a></li>
+              <li><a href="page/privacy">Privacy</a></li>
+              <li><a href="page/terms">Terms Of Service</a></li>
+              <li><a href="page/contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-3 column">
+            <!-- -->
+          </div>
+          <div class="col-xs-12 col-sm-3 text-xs-right">
+            <h6 class="text-uppercase">Follow</h6>
+            <ul class="list-inline">
+              <li class="list-inline-item"><a rel="nofollow" href="https://twitter.com/imvubox" target="_blank" title="Twitter"><i class="icon-lg ion-social-twitter-outline"></i></a>&nbsp;</li>
+              <li class="list-inline-item"><a rel="nofollow" href="https://facebook.com/imvubox" target="_blank" title="Facebook"><i class="icon-lg ion-social-facebook-outline"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <br>
+        <span class="pull-right text-muted small"><a href="https://bp.la">made by bp.la<small>/7statics</small></a> © 2016 imvubox</span>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+    //<![CDATA[
+    var owa_baseUrl = 'https://8bp.de/';
+    var owa_cmds = owa_cmds || [];
+    owa_cmds.push(['setSiteId', '0a11006747a12b54acf8c02efd08667d']);
+    owa_cmds.push(['trackPageView']);
+    owa_cmds.push(['trackClicks']);
+    owa_cmds.push(['trackDomStream']);
+    (function() {
+      var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+      owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
+      _owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
+      var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+    }());
+    //]]>
+    </script>
+  </body>
+</html>
