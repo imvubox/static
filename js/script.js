@@ -1,8 +1,9 @@
 (function($) {
   "use strict";
 
-  if (("www.imvubox.com" == window.location.host) && (window.location.protocol != "https:"))
+  if (("www.imvubox.com" == window.location.host) && (window.location.protocol != "https:")) {
     window.location.protocol = "https";
+  }
 
   $('body').scrollspy({
       target: '.navbar-fixed-top',
