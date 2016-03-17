@@ -1185,7 +1185,7 @@ ACCESS WILL BE GRANTED AFTER A FEW HOURS. NO P...</p>
 window.onload = function() {
   $(document).ready(function() {
     if (location.hash.length > 2) {
-      $('.form-inline .form-control').get().value = location.hash.substring(2);
+      $('.form-inline .form-control').get()[0].value = location.hash.substring(2);
       imvuboxQuery($('.form-inline .form-control').get()[0]);
     }
   });
