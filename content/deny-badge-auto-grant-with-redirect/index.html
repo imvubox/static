@@ -87,7 +87,17 @@ That's it! It's up to you what you want your product page to say and do.  I'll t
     </div>
   </div>
   <div class="col-xs-12">
-    <p class="lead">OK, let's say you plunked down 100K credits on a badge, and you find it isn't helping sales, really?  What is an avatar to do?  All the leeches want freebies, but are not playing the game to your advantage.  Well, you can charge them for the badge by redirecting them to a product page instead of granting the badge when they click &quot;Request Badge&quot;.  The trick is to disconnect the JavaScript that grants the badge, and substitute it with the JavaScript that -you- want to run.<br><br>The technical trick here is that your JavaScript will typically run -before- the click event handler is added to the badge.  The way to get around that is to place your code in a jQuery $(document).ready() statement, so that it doesn't run until -after- the badge granting code has been attached.  And IMVU conveniently uses at least 2 JavaScript frameworks (YUI and jQuery) you can piggyback on.  And since the event is attached to the button using YUI, you have to use YUI to remove it.<br><br>To use this code you need to do the following:<br>* Make sure your badge(s) are set to Auto-Grant on.<br>* Change myIMVUID to your own ID<br>* Change the productID to one of yours<br>* Change the badge numbers in the comma delimited list.  They are numbered sequentially starting at 1.  If you only have one badge, just use [1] with no commas inside.<br><br>That's it! It's up to you what you want your product page to say and do.  I'll tell that if they buy a product with real credits (not promo) and PM me, they'll get the badge.  I think that's fair, don't you?</p>
+    <p class="lead">OK, let's say you plunked down 100K credits on a badge, and you find it isn't helping sales, really?  What is an avatar to do?  All the leeches want freebies, but are not playing the game to your advantage.  Well, you can charge them for the badge by redirecting them to a product page instead of granting the badge when they click &quot;Request Badge&quot;.  The trick is to disconnect the JavaScript that grants the badge, and substitute it with the JavaScript that -you- want to run.
+<br>
+<br>The technical trick here is that your JavaScript will typically run -before- the click event handler is added to the badge.  The way to get around that is to place your code in a jQuery $(document).ready() statement, so that it doesn't run until -after- the badge granting code has been attached.  And IMVU conveniently uses at least 2 JavaScript frameworks (YUI and jQuery) you can piggyback on.  And since the event is attached to the button using YUI, you have to use YUI to remove it.
+<br>
+<br>To use this code you need to do the following:
+<br>* Make sure your badge(s) are set to Auto-Grant on.
+<br>* Change myIMVUID to your own ID
+<br>* Change the productID to one of yours
+<br>* Change the badge numbers in the comma delimited list.  They are numbered sequentially starting at 1.  If you only have one badge, just use [1] with no commas inside.
+<br>
+<br>That's it! It's up to you what you want your product page to say and do.  I'll tell that if they buy a product with real credits (not promo) and PM me, they'll get the badge.  I think that's fair, don't you?</p>
     <div class="alert alert-info">This code snippet was originally contributed by <a href="http://www.facebook.com/747353694" target="_blank">Cheri Imvu</a>. <a href="http://www.imvu.com/catalog/web_mypage.php?user=25522141" target="_blank">Go to the author' imvu website.</a></div>  </div>
   <div class="col-xs-12 wow bounce">
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -164,21 +174,6 @@ for (var i in badgeNumbers) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
     <script src="js/script.js"></script>
-    <script>
-    //<![CDATA[
-    var owa_baseUrl = 'https://8bp.de/';
-    var owa_cmds = owa_cmds || [];
-    owa_cmds.push(['setSiteId', '0a11006747a12b54acf8c02efd08667d']);
-    owa_cmds.push(['trackPageView']);
-    owa_cmds.push(['trackClicks']);
-    owa_cmds.push(['trackDomStream']);
-    (function() {
-      var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
-      owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
-      _owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
-      var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
-    }());
-    //]]>
-    </script>
+    
   </body>
 </html>
